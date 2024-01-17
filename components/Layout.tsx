@@ -18,7 +18,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <ResizablePanelGroup
       direction="horizontal"
-      className="min-h-screen w-screen rounded-lg border"
+      className="min-h-screen w-screen"
     >
       <ResizablePanel
         defaultSize={20}

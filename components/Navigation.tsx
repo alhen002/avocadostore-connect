@@ -4,10 +4,6 @@ import NavLink from "@/components/NavLink";
 
 const navItems = [
   {
-    name: "dashboard",
-    href: "/admin/dashboard",
-  },
-  {
     name: "profile",
     href: "/admin/profile",
   },
