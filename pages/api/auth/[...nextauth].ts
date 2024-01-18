@@ -25,7 +25,6 @@ export const authOptions: NextAuthOptions = {
             email: credentials.email,
           },
         });
-        console.log("from authorize", user);
 
         if (!user || !user?.password) {
           throw new Error("Invalid Credentials");
