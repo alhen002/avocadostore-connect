@@ -1,8 +1,13 @@
-import * as trpcNext from "@trpc/server/adapters/next";
-import { appRouter } from "../../../server/routers/_app";
-// export API handler
-// @link https://trpc.io/docs/v11/server/adapters
-export default trpcNext.createNextApiHandler({
-  router: appRouter,
-  createContext: () => ({}),
-});
+import { type NextApiRequest, type NextApiResponse } from "next";
+import { createNextApiHandler } from "@trpc/server/adapters/next";
+import { appRouter } from "@/server/routers/_app";
+
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  // Create and call the tRPC handler
+  return createNextApiHandler({
+    router: appRouter,
+    createContext: () => ({}),
+  })(req, res);
+};
+
+export default handler;
