@@ -4,26 +4,34 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 import { signIn } from "next-auth/react";
-
+import Paragraph from "@/components/Paragraph";
+import { FaGoogle } from "react-icons/fa";
+import { useRouter } from "next/router";
+import Link from "next/link";
 function LoginForm() {
+  //TODO: SERVERSIDE VALIDATION W ZOD & REACT HOOK FORM
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.target as HTMLFormElement);
     const email = data.get("email");
-    console.log(email);
     const password = data.get("password");
-    console.log(password);
     await signIn("credentials", {
       email: email as string,
       password: password as string,
-      redirect: false,
+      callbackUrl: "/admin",
     });
   }
+
   return (
     <form className={"flex flex-col gap-6 my-6"} onSubmit={handleSubmit}>
       <div className={"flex flex-col gap-2"}>
         <Label htmlFor={"email"}>Email</Label>
-        <Input id={"email"} name={"email"} placeholder={"Your Email Address"} />
+        <Input
+          id={"email"}
+          name={"email"}
+          required
+          placeholder={"Your Email Address"}
+        />
       </div>
       <div className={"flex flex-col gap-2"}>
         <Label htmlFor={"password"}>Password</Label>
@@ -32,10 +40,21 @@ function LoginForm() {
           className={"text-neutral-900"}
           id={"password"}
           name={"password"}
+          required
+          min={12}
           placeholder={"Your super safe password"}
         />
       </div>
-      <Button>Login</Button>
+      <div className={"flex flex-col gap-3 items"}>
+        <Button>Login</Button>
+        <Paragraph className={"self-center"}>or</Paragraph>
+        <Button variant={"outline"}>
+          Login with
+          <span className={"ml-2"}>
+            <FaGoogle />
+          </span>
+        </Button>
+      </div>
     </form>
   );
 }

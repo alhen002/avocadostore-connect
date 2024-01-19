@@ -31,6 +31,7 @@ model User {
   emailVerified DateTime?
   password      String?
   image         String?
+  secret        String?   @unique
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   accounts      Account[]
